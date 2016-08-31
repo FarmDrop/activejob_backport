@@ -11,7 +11,7 @@ module ActiveJob
             'wrapped' => job.class.to_s,
             'queue' => job.queue_name,
             'args'  => [ job.serialize ],
-            'retry' => true
+            'retry' => JobWrapper.sidekiq_options['retry']
         end
 
         def enqueue_at(job, timestamp)
@@ -20,7 +20,7 @@ module ActiveJob
             'wrapped' => job.class.to_s,
             'queue' => job.queue_name,
             'args'  => [ job.serialize ],
-            'retry' => true,
+            'retry' => JobWrapper.sidekiq_options['retry'],
             'at'    => timestamp
         end
       end
